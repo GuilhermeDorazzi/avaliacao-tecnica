@@ -1,3 +1,4 @@
+using Citel.Ioc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,9 @@ namespace Citel.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // injecao de dependencia
+            InjetarDependencias(services);
+
             services.AddCors();
 
             services.AddMvcCore(config =>
@@ -41,6 +45,11 @@ namespace Citel.Api
 
             app.UseMvc();
 
+        }
+
+        private void InjetarDependencias(IServiceCollection services)
+        {
+            BootStrapper.InjetarDependencias(services, null);
         }
     }
 }

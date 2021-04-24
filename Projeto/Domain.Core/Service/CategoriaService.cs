@@ -1,4 +1,5 @@
 ﻿using Citel.Core.Model;
+using Citel.Core.Repositories;
 using Citel.Core.Service.Interfaces;
 using System.Collections.Generic;
 
@@ -6,29 +7,36 @@ namespace Citel.Core.Service
 {
     public class CategoriaService : ICategoriaService
     {
+        private ICategoriaRepository iCategoriaRepository;
+
+        public CategoriaService(ICategoriaRepository iCategoriaRepository)
+        {
+            this.iCategoriaRepository = iCategoriaRepository;
+        }
+
         public bool Atualizar(Categoria entidade)
         {
-            throw new System.NotImplementedException();
+            return iCategoriaRepository.Atualizar(entidade);
         }
 
         public bool Inserir(Categoria entidade)
         {
-            throw new System.NotImplementedException();
+            return iCategoriaRepository.Inserir(entidade);
         }
 
         public bool Remover(Categoria entidade)
         {
-            throw new System.NotImplementedException();
+            return iCategoriaRepository.Remover(entidade);
         }
 
         public IList<Categoria> Selecionar(Categoria filtro)
         {
-            throw new System.NotImplementedException();
+            return iCategoriaRepository.Selecionar(filtro);
         }
 
         public Categoria SelecionarRegistro(Categoria filtro)
         {
-            throw new System.NotImplementedException();
+            return iCategoriaRepository.SelecionarRegistro(filtro);
         }
     }
 }
