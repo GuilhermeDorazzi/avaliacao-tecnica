@@ -4,14 +4,14 @@ namespace Citel.Data.Repositories.Base
 {
     public class BaseRepository<T>
     {
-        public IList<T> Selecionar(T filtro){return null;}
+        public virtual IList<T> Selecionar(T filtro){return null;}
 
-        public bool Inserir(T entidade) { return false; }
+        public virtual bool Inserir(T entidade) { return false; }
 
-        public bool Atualizar(T entidade) { return false; }
+        public virtual bool Atualizar(T entidade) { return false; }
 
-        public bool Remover(T entidade) { return false; }
+        public virtual bool Remover(T entidade) { return false; }
 
-        public T SelecionarRegistro(T filtro) { return filtro; }
+        public virtual T SelecionarRegistro(T filtro) { return filtro; }
     }
 }

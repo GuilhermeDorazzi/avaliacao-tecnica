@@ -1,9 +1,6 @@
-﻿using Citel.Core.Service.Interfaces;
+﻿using Citel.Core.Model;
+using Citel.Core.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Citel.Api.Controllers
 {
@@ -19,8 +16,8 @@ namespace Citel.Api.Controllers
         [HttpGet("v1/teste/dependencias")]
         public IActionResult Index()
         {
-            iCategoriaService.Inserir(new Core.Model.Categoria() {});
-            return Ok("teste de inejção de dependencia OK");
+            var resultado = iCategoriaService.Selecionar(new Categoria() {});
+            return Ok(resultado);
         }
     }
 }
