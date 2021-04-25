@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Citel.Core.Model.Base;
 
 namespace Citel.Core.Service.Base
 {
     public interface IBaseService<T>
     {
-        IList<T> Selecionar(T filtro);
+        ResultadoPadrao Selecionar(T filtro);
 
-        bool Inserir(T entidade);
+        ResultadoPadrao Inserir(T entidade);
 
-        bool Atualizar(T entidade);
+        ResultadoPadrao Atualizar(T entidade);
 
-        bool Remover(T entidade);
+        ResultadoPadrao Remover(T entidade);
 
-        T SelecionarRegistro(T filtro);
+        ResultadoPadrao SelecionarRegistro(T filtro);
     }
 }

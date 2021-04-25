@@ -1,43 +1,103 @@
 ﻿using Citel.Core.Model;
+using Citel.Core.Model.Base;
 using Citel.Core.Repositories;
 using Citel.Core.Service.Interfaces;
 using System;
-using System.Collections.Generic;
 
 namespace Citel.Core.Service
 {
     public class ProdutoService : IProdutoService
     {
-        private IProdutoRepository iProdutoRepository;
+        private readonly IProdutoRepository iProdutoRepository;
 
         public ProdutoService(IProdutoRepository iProdutoRepository)
         {
             this.iProdutoRepository = iProdutoRepository;
         }
 
-        public bool Atualizar(Produto entidade)
+        public ResultadoPadrao Atualizar(Produto entidade)
         {
-            return iProdutoRepository.Atualizar(entidade);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iProdutoRepository.Atualizar(entidade)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
 
-        public bool Inserir(Produto entidade)
+        public ResultadoPadrao Inserir(Produto entidade)
         {
-            return iProdutoRepository.Inserir(entidade);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iProdutoRepository.Inserir(entidade)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
 
-        public bool Remover(Produto entidade)
+        public ResultadoPadrao Remover(Produto entidade)
         {
-            return iProdutoRepository.Remover(entidade);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iProdutoRepository.Remover(entidade)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
 
-        public IList<Produto> Selecionar(Produto filtro)
+        public ResultadoPadrao Selecionar(Produto filtro)
         {
-            return iProdutoRepository.Selecionar(filtro);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iProdutoRepository.Selecionar(filtro)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
 
-        public Produto SelecionarRegistro(Produto filtro)
+        public ResultadoPadrao SelecionarRegistro(Produto filtro)
         {
-            return iProdutoRepository.SelecionarRegistro(filtro);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iProdutoRepository.SelecionarRegistro(filtro)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
     }
 }

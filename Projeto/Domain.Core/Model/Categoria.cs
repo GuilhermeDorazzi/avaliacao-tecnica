@@ -5,6 +5,11 @@ namespace Citel.Core.Model
     [DataContract]
     public class Categoria
     {
+        public Categoria()
+        {
+            CodCategoria = -1;
+        }
+
         [DataMember(Name = "cod_categoria")]
         public long CodCategoria { get; set; }
 

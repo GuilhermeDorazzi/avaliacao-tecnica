@@ -1,42 +1,104 @@
 ﻿using Citel.Core.Model;
+using Citel.Core.Model.Base;
 using Citel.Core.Repositories;
 using Citel.Core.Service.Interfaces;
-using System.Collections.Generic;
+using System;
 
 namespace Citel.Core.Service
 {
     public class CategoriaService : ICategoriaService
     {
-        private ICategoriaRepository iCategoriaRepository;
+        private readonly ICategoriaRepository iCategoriaRepository;
 
         public CategoriaService(ICategoriaRepository iCategoriaRepository)
         {
             this.iCategoriaRepository = iCategoriaRepository;
         }
 
-        public bool Atualizar(Categoria entidade)
+        public ResultadoPadrao Atualizar(Categoria entidade)
         {
-            return iCategoriaRepository.Atualizar(entidade);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iCategoriaRepository.Atualizar(entidade)
+                };
+
+                return resultado;
+            }
+            catch(Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
+
         }
 
-        public bool Inserir(Categoria entidade)
+        public ResultadoPadrao Inserir(Categoria entidade)
         {
-            return iCategoriaRepository.Inserir(entidade);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iCategoriaRepository.Inserir(entidade)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
 
-        public bool Remover(Categoria entidade)
+        public ResultadoPadrao Remover(Categoria entidade)
         {
-            return iCategoriaRepository.Remover(entidade);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iCategoriaRepository.Remover(entidade)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
 
-        public IList<Categoria> Selecionar(Categoria filtro)
+        public ResultadoPadrao Selecionar(Categoria filtro)
         {
-            return iCategoriaRepository.Selecionar(filtro);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iCategoriaRepository.Selecionar(filtro)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
 
-        public Categoria SelecionarRegistro(Categoria filtro)
+        public ResultadoPadrao SelecionarRegistro(Categoria filtro)
         {
-            return iCategoriaRepository.SelecionarRegistro(filtro);
+            try
+            {
+                var resultado = new ResultadoPadrao()
+                {
+                    Dados = iCategoriaRepository.SelecionarRegistro(filtro)
+                };
+
+                return resultado;
+            }
+            catch (Exception e)
+            {
+                return new ResultadoPadrao(e);
+            }
         }
     }
 }

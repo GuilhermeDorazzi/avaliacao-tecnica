@@ -15,21 +15,35 @@ namespace Citel.Data.Repositories
 
         public bool Atualizar(Categoria entidade)
         {
-            throw new System.NotImplementedException();
+            var query = @"
+                           update tb_categorias
+                              set nom_categoria = @NomCategoria,
+                                  flg_ativo     = @FlgAtivo
+                            where cod_categoria = @CodCategoria
+                         ";
+            return this.Execute(query, entidade) > 0;
         }
 
         public bool Inserir(Categoria entidade)
         {
-            throw new System.NotImplementedException();
+            if (entidade.CodCategoria <= 0)
+                entidade.CodCategoria = this.GetGerarCodigo("tb_categorias", "cod_categoria");
+
+            var query = @"
+                           insert into tb_categorias(cod_categoria,nom_categoria,flg_ativo) 
+                           values (@CodCategoria,@NomCategoria,@FlgAtivo)
+                         ";
+            return this.Execute(query, entidade) > 0;
         }
 
         public bool Remover(Categoria entidade)
         {
-            throw new System.NotImplementedException();
+           var query = @"delete from tb_categorias where cod_categoria = @CodCategoria ";
+           return this.Execute(query, entidade) > 0;
         }
 
-        public IList<Categoria> Selecionar(Categoria filtro) {
-
+        public IList<Categoria> Selecionar(Categoria filtro) 
+        {
             var query = @"
                             select 
 	                               c.cod_categoria CodCategoria
@@ -45,7 +59,18 @@ namespace Citel.Data.Repositories
 
         public Categoria SelecionarRegistro(Categoria filtro)
         {
-            throw new System.NotImplementedException();
+            var query = @"
+                            select 
+	                               c.cod_categoria CodCategoria
+	                             , c.nom_categoria NomCategoria
+                                 , c.flg_ativo     FlgAtivo
+                            from tb_categorias as c
+                           where c.cod_categoria = @CodCategoria
+                         ";
+
+            var resultado = this.Query<Categoria>(query, filtro);
+
+            return resultado.FirstOrDefault();
         }
     }
 }
