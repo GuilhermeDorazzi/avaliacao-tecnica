@@ -2,6 +2,7 @@
 using Citel.Core.Model.Base;
 using Citel.Core.Repositories;
 using Citel.Core.Service.Interfaces;
+using Citel.Resources;
 using System;
 
 namespace Citel.Core.Service
@@ -19,10 +20,11 @@ namespace Citel.Core.Service
         {
             try
             {
-                var resultado = new ResultadoPadrao()
-                {
-                    Dados = iCategoriaRepository.Atualizar(entidade)
-                };
+                var resultado = new ResultadoPadrao();
+                bool operacao = iCategoriaRepository.Atualizar(entidade);
+
+                if (!operacao)
+                    resultado = new ResultadoPadrao(AppString.ERR_NaoFoiPossivelConcluirOperacao);
 
                 return resultado;
             }
@@ -37,10 +39,11 @@ namespace Citel.Core.Service
         {
             try
             {
-                var resultado = new ResultadoPadrao()
-                {
-                    Dados = iCategoriaRepository.Inserir(entidade)
-                };
+                var resultado = new ResultadoPadrao();
+                bool operacao = iCategoriaRepository.Inserir(entidade);
+
+                if (!operacao)
+                    resultado = new ResultadoPadrao(AppString.ERR_NaoFoiPossivelConcluirOperacao);
 
                 return resultado;
             }
@@ -54,10 +57,11 @@ namespace Citel.Core.Service
         {
             try
             {
-                var resultado = new ResultadoPadrao()
-                {
-                    Dados = iCategoriaRepository.Remover(entidade)
-                };
+                var resultado = new ResultadoPadrao();
+                bool operacao = iCategoriaRepository.Remover(entidade);
+
+                if (!operacao)
+                    resultado = new ResultadoPadrao(AppString.ERR_NaoFoiPossivelConcluirOperacao);
 
                 return resultado;
             }

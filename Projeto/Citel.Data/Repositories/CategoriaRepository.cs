@@ -44,20 +44,15 @@ namespace Citel.Data.Repositories
 
         public IList<Categoria> Selecionar(Categoria filtro) 
         {
-            var query = @"
-                            select 
-	                               c.cod_categoria CodCategoria
-	                             , c.nom_categoria NomCategoria
-                                 , c.flg_ativo     FlgAtivo
-                            from tb_categorias as c
-                         ";
-
-            var resultado = this.Query<Categoria>(query, new { });
-
-            return resultado.ToList();
+            return SelecionarFiltro(filtro).ToList();
         }
 
         public Categoria SelecionarRegistro(Categoria filtro)
+        {
+            return SelecionarFiltro(filtro).FirstOrDefault();
+        }
+
+        private IList<Categoria> SelecionarFiltro(Categoria filtro)
         {
             var query = @"
                             select 
@@ -65,12 +60,19 @@ namespace Citel.Data.Repositories
 	                             , c.nom_categoria NomCategoria
                                  , c.flg_ativo     FlgAtivo
                             from tb_categorias as c
-                           where c.cod_categoria = @CodCategoria
+                            {0}
                          ";
+
+            string where = string.Empty;
+
+            if (filtro.CodCategoria > 0)
+                where += "where c.cod_categoria = @CodCategoria";
+
+            query = string.Format(query, where);
 
             var resultado = this.Query<Categoria>(query, filtro);
 
-            return resultado.FirstOrDefault();
+            return resultado.ToList();
         }
     }
 }

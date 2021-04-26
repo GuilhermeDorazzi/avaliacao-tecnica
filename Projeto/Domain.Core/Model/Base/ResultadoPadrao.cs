@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Citel.Resources;
+using System;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Citel.Core.Model.Base
 {
@@ -9,7 +11,7 @@ namespace Citel.Core.Model.Base
         /// <summary>
         /// Dados a serem retornados para quem chamou a API
         /// </summary>
-        [DataMember(Name = "dados")]
+        [JsonPropertyName("dados")]
         public object Dados { get; set; }
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace Citel.Core.Model.Base
         public ResultadoPadrao()
         {
             OperacaoEncerradaComSucesso = true;
-            MensagemOperacao = "Operação encerrada com sucesso";
+            MensagemOperacao = AppString.TIT_OperacaoRealizadaSucesso;
         }
 
         /// <summary>
@@ -76,17 +78,6 @@ namespace Citel.Core.Model.Base
         /// <param name="mensagemOperacao">Exceção</param>
         public void RegistrarExcecao(string mensagemOperacao)
         {
-            RegistrarExcecao(null, mensagemOperacao);
-        }
-
-        /// <summary>
-        /// Registra uma exceção para a entidade
-        /// </summary>
-        /// <param name="mensagemOperacao">Exceção</param>
-        /// <param name="httpStatusCode">Código do status http referente ao problema</param>
-        public void RegistrarExcecao(string mensagemOperacao, int httpStatusCode)
-        {
-            HttpStatusCode = httpStatusCode;
             RegistrarExcecao(null, mensagemOperacao);
         }
 

@@ -1,8 +1,7 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Citel.Core.Model
 {
-    [DataContract]
     public class Categoria
     {
         public Categoria()
@@ -10,13 +9,13 @@ namespace Citel.Core.Model
             CodCategoria = -1;
         }
 
-        [DataMember(Name = "cod_categoria")]
+        [JsonPropertyName("cod_categoria")]
         public long CodCategoria { get; set; }
 
-        [DataMember(Name = "nom_categoria")]
+        [JsonPropertyName("nom_categoria")]
         public string NomCategoria { get; set; }
 
-        [DataMember(Name = "flg_ativo")]
+        [JsonPropertyName("flg_ativo")]
         public string FlgAtivo { get; set; }
     }
 }

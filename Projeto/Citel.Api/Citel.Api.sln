@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citel.Api", "Citel.Api.csproj", "{3B8C0CBC-B06C-4325-BDF7-751BE809CD20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Citel.Api", "Citel.Api.csproj", "{3B8C0CBC-B06C-4325-BDF7-751BE809CD20}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{23DE31A5-8279-4998-A670-06021FC0D36E}"
 EndProject
@@ -11,13 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{BDC18F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{535482DF-E4F1-43FD-A1D3-4C45918B4AF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citel.Core", "..\Domain.Core\Citel.Core.csproj", "{FC903869-1864-4EC4-804A-CB5DD51EB475}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Citel.Core", "..\Domain.Core\Citel.Core.csproj", "{FC903869-1864-4EC4-804A-CB5DD51EB475}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citel.Data", "..\Citel.Data\Citel.Data.csproj", "{3963F066-917C-4D7E-BBF8-28A1B4F7C0AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Citel.Data", "..\Citel.Data\Citel.Data.csproj", "{3963F066-917C-4D7E-BBF8-28A1B4F7C0AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{8B2ADA76-98DA-4FDB-A196-D7E3A6A7AC72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citel.Ioc", "..\Citel.Ioc\Citel.Ioc.csproj", "{C320DB61-036C-40BA-83AA-0657C24EA0F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Citel.Ioc", "..\Citel.Ioc\Citel.Ioc.csproj", "{C320DB61-036C-40BA-83AA-0657C24EA0F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citel.Resources", "..\Citel.Resources\Citel.Resources.csproj", "{6F773A36-4874-46C7-998D-25ACF58AE2A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{C320DB61-036C-40BA-83AA-0657C24EA0F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C320DB61-036C-40BA-83AA-0657C24EA0F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C320DB61-036C-40BA-83AA-0657C24EA0F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F773A36-4874-46C7-998D-25ACF58AE2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F773A36-4874-46C7-998D-25ACF58AE2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F773A36-4874-46C7-998D-25ACF58AE2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F773A36-4874-46C7-998D-25ACF58AE2A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{3963F066-917C-4D7E-BBF8-28A1B4F7C0AF} = {535482DF-E4F1-43FD-A1D3-4C45918B4AF2}
 		{8B2ADA76-98DA-4FDB-A196-D7E3A6A7AC72} = {535482DF-E4F1-43FD-A1D3-4C45918B4AF2}
 		{C320DB61-036C-40BA-83AA-0657C24EA0F6} = {8B2ADA76-98DA-4FDB-A196-D7E3A6A7AC72}
+		{6F773A36-4874-46C7-998D-25ACF58AE2A3} = {8B2ADA76-98DA-4FDB-A196-D7E3A6A7AC72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FE1109F-A04C-4A83-A1B0-470F343A79A8}

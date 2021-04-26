@@ -1,16 +1,60 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Citel.Api.Controllers.Base.Util;
+using Citel.Core.Model;
+using Citel.Core.Service.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Citel.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ProdutosController : Controller
     {
-        public IActionResult Index()
+        private IProdutoService iProdutoService;
+
+        public ProdutosController(IProdutoService iProdutoService)
         {
-            return View();
+            this.iProdutoService = iProdutoService;
         }
+
+        [HttpGet]
+        [Route(@"v1/get/produtos/categoria/{codigo?}")]
+        public IActionResult Get(long codigo)
+        {
+            var resultado = iProdutoService.Selecionar(new Produto() { CodCategoria = codigo });
+            return RespostaApiUtil.ConfigurarRespostaPadraoApi(this, resultado, true);
+        }
+
+        [HttpGet]
+        [Route(@"v1/get/{codigoProduto?}/{codigoCategoria?}")]
+        public IActionResult Get(long codigoProduto, long codigoCategoria)
+        {
+            var resultado = iProdutoService.SelecionarRegistro(new Produto() { CodCategoria = codigoCategoria, CodProduto = codigoProduto});
+            return RespostaApiUtil.ConfigurarRespostaPadraoApi(this, resultado, true);
+        }
+
+        [HttpPost]
+        [Route(@"v1/post/")]
+        public IActionResult Post(Produto categoria)
+        {
+            var resultado = iProdutoService.Inserir(categoria);
+            return RespostaApiUtil.ConfigurarRespostaPadraoApi(this, resultado, true);
+        }
+
+        [HttpPut]
+        [Route(@"v1/put/")]
+        public IActionResult Put(Produto categoria)
+        {
+            var resultado = iProdutoService.Atualizar(categoria);
+            return RespostaApiUtil.ConfigurarRespostaPadraoApi(this, resultado, true);
+        }
+
+        [HttpDelete]
+        [Route(@"v1/delete/{codigoProduto?}/{codigoCategoria?}")]
+        public IActionResult Delete(long codigoProduto, long codigoCategoria)
+        {
+            var resultado = iProdutoService.Remover(new Produto() { CodProduto = codigoProduto, CodCategoria = codigoCategoria });
+            return RespostaApiUtil.ConfigurarRespostaPadraoApi(this, resultado, true);
+        }
+
     }
 }
