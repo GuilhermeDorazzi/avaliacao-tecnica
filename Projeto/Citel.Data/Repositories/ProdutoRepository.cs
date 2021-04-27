@@ -17,11 +17,11 @@ namespace Citel.Data.Repositories
         {
             var query = @"
                              update tb_produtos
-                                set cod_barras      = @CodBarras   
-                                    nom_produto     = @NomProduto  
-                                    des_produto     = @DesProduto  
-                                    vlr_produto     = @VlrProduto  
-                                    flg_ativo       = @FlgAtivo    
+                                set  cod_barras      = @CodBarras   
+                                    ,nom_produto     = @NomProduto  
+                                    ,des_produto     = @DesProduto  
+                                    ,vlr_produto     = @VlrProduto  
+                                    ,flg_ativo       = @FlgAtivo    
                                 where cod_categoria = @CodCategoria and 
                                       cod_produto   = @CodProduto
                          ";
