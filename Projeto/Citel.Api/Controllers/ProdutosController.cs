@@ -17,15 +17,15 @@ namespace Citel.Api.Controllers
         }
 
         [HttpGet]
-        [Route(@"v1/get/produtos/categoria/{codigo?}")]
-        public IActionResult Get(long codigo)
+        [Route(@"v1/Get/Produtos/Categoria/{codigoCategoria?}")]
+        public IActionResult Get(long codigoCategoria)
         {
-            var resultado = iProdutoService.Selecionar(new Produto() { CodCategoria = codigo });
+            var resultado = iProdutoService.Selecionar(new Produto() { CodCategoria = codigoCategoria });
             return RespostaApiUtil.ConfigurarRespostaPadraoApi(this, resultado, true);
         }
 
         [HttpGet]
-        [Route(@"v1/get/{codigoProduto?}/{codigoCategoria?}")]
+        [Route(@"v1/Get/{codigoProduto?}/{codigoCategoria?}")]
         public IActionResult Get(long codigoProduto, long codigoCategoria)
         {
             var resultado = iProdutoService.SelecionarRegistro(new Produto() { CodCategoria = codigoCategoria, CodProduto = codigoProduto});
@@ -33,7 +33,7 @@ namespace Citel.Api.Controllers
         }
 
         [HttpPost]
-        [Route(@"v1/post/")]
+        [Route(@"v1/Post/")]
         public IActionResult Post(Produto categoria)
         {
             var resultado = iProdutoService.Inserir(categoria);
@@ -41,7 +41,7 @@ namespace Citel.Api.Controllers
         }
 
         [HttpPut]
-        [Route(@"v1/put/")]
+        [Route(@"v1/Put/")]
         public IActionResult Put(Produto categoria)
         {
             var resultado = iProdutoService.Atualizar(categoria);
@@ -49,7 +49,7 @@ namespace Citel.Api.Controllers
         }
 
         [HttpDelete]
-        [Route(@"v1/delete/{codigoProduto?}/{codigoCategoria?}")]
+        [Route(@"v1/Delete/{codigoProduto?}/{codigoCategoria?}")]
         public IActionResult Delete(long codigoProduto, long codigoCategoria)
         {
             var resultado = iProdutoService.Remover(new Produto() { CodProduto = codigoProduto, CodCategoria = codigoCategoria });

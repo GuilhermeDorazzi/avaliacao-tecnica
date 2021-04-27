@@ -1,0 +1,344 @@
+swagger: "2.0"
+info:
+  description: "Esquema de APIs da Avaliação Tecnica Citel"
+  version: "1.0.0"
+  title: "Avaliação"
+host: "localhost:9032"
+basePath: "/api"
+
+############################################
+# START                                    #
+#          TAGS dos agrupamentos           #
+#                                          #
+############################################
+
+tags:
+- name: "Categorias"
+  description: "APIs relacionados a categoria"
+- name: "Produtos"
+  description: "APIs relacionados a produtos"
+
+############################################
+# END                                      #
+#          TAGS dos agrupamentos           #
+#                                          #
+############################################
+
+schemes:
+- "http"
+
+############################################
+# START                                    #
+#         PATHS dos agrupamentos           #
+#                                          #
+############################################
+paths:
+
+############################################
+#            CATEGORIA                     #
+############################################
+  /Categorias/v1/Get/:
+    get:
+      tags: 
+      - "Categorias"
+      summary: "Lista de categorias"
+      description: "Recupera a lista de categorias"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              dados:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Categoria"
+        "400":
+          description: "Bad Request"
+  ##
+  /Categorias/v1/Get/{codigo}:
+    get:
+      tags: 
+      - "Categorias"
+      summary: "Categoria"
+      description: "Rcupera o cadastro de uma determinada categoria com base no código"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "codigo"
+        in: "path"
+        description: "Código da categoria desejada"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+              $ref: "#/definitions/Categoria"
+        "400":
+          description: "Bad Request"
+  ##
+  /Categorias/v1/Post/:
+    post:
+      tags: 
+      - "Categorias"
+      summary: "Envia o cadastro de uma categoria para ser cadastrado"
+      description: "Cadastra uma categoria"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto com informações da nova categoria"
+        required: true
+        schema:
+          $ref: "#/definitions/Categoria"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
+  ##
+  /Categorias/v1/Put/:
+    put:
+      tags: 
+      - "Categorias"
+      summary: "Envia o cadastro de uma categoria para ser cadastrado"
+      description: "Cadastra uma categoria"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto com informações da nova categoria"
+        required: true
+        schema:
+          $ref: "#/definitions/Categoria"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
+  ##
+  /Categorias/v1/Delete/{codigo}:
+    delete:
+      tags: 
+      - "Categorias"
+      summary: "Realiza a remoção de um categoria, obs: só vai ser removido se não tiver dependencia, produtos cadastros nessa categoria"
+      description: "Remove o cadastro de uma categoria"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "codigo"
+        in: "path"
+        description: "Código da categoria desejada"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
+  ##
+############################################
+#             PRODUTO                      #
+############################################
+  /Produtos/v1/Get/Produtos/Categoria/{codigoCategoria}:
+    get:
+      tags: 
+      - "Produtos"
+      summary: "Lista de produtos de uma determinada categoria"
+      description: "Recupera a lista de produtos"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "codigoCategoria"
+        in: "path"
+        description: "Código da categoria para filtar apenas os produtos da categoria desejada"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              dados:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Produto"
+        "400":
+          description: "Bad Request"
+  ##
+  /Produtos/v1/Get/{codigoProduto}/{codigoCategoria}:
+    get:
+      tags: 
+      - "Produtos"
+      summary: "Produto"
+      description: "Rcupera o cadastro de um determinada produto com base no código"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "codigoProduto"
+        in: "path"
+        description: "Código do produto"
+        required: true
+        type: "integer"
+      - name: "codigoCategoria"
+        in: "path"
+        description: "Código da categoria"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+              $ref: "#/definitions/Produto"
+        "400":
+          description: "Bad Request"
+  ##
+  /Produtos/v1/Post/:
+    post:
+      tags: 
+      - "Produtos"
+      summary: "Envia o cadastro de um produto para ser salvo"
+      description: "Cadastra um produto"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto com informações do novo produto"
+        required: true
+        schema:
+          $ref: "#/definitions/Produto"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
+  ##
+  /Produtos/v1/Put/:
+    put:
+      tags: 
+      - "Produtos"
+      summary: "Envia o cadastro de um produto para ser cadastrado"
+      description: "Cadastra um produto"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto com informações de um novo produto"
+        required: true
+        schema:
+          $ref: "#/definitions/Produto"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
+  ##
+  /Produtos/v1/Delete/{codigoProduto}/{codigoCategoria}:
+    delete:
+      tags: 
+      - "Produtos"
+      summary: "Remove o cadastro de um produto"
+      description: "remove o cadastro de um produto"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "codigoProduto"
+        in: "path"
+        description: "Código do produto"
+        required: true
+        type: "integer"
+      - name: "codigoCategoria"
+        in: "path"
+        description: "Código da categoria"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Bad Request"
+  ##
+############################################
+# END                                      #
+#         PATHS dos agrupamentos           #
+#                                          #
+############################################        
+
+############################################
+# START                                    #
+#       DEFINITIONS Modelo de dados        #
+#                                          #
+############################################  
+definitions:
+  ###
+  Categoria:
+    type: "object"
+    properties:
+      cod_categoria:
+        type: "integer"
+        description: "Código da Categoria PK Banco"
+      nom_categoria:
+        type: "string"
+        description: "Nome da categoria, tamanho maximo 50 caracteres"
+      flg_ativo:
+        type: "string"
+        description: "Ativo [S]im ou [N]ão, apenas 1 caracter"
+  ###
+  Produto:
+    type: "object"
+    properties:
+      cod_produto:
+        type: "integer"        
+        description: "Código do produto PK Banco"
+      cod_categoria:
+        type: "integer"
+        description: "Código da categoria PK Banco"
+      cod_barras:
+        type: "string"
+        description: "Código de barras, tamanho maximo 20 caracteres"
+      nom_produto:
+        type: "string"
+        description: "Nome do produto, tamanho maximo 50 caracteres"
+      des_produto:
+        type: "string"
+        description: "Descrição do produto, tamanho maximo 500 caracteres"
+      vlr_produto:
+        type: "number"
+        description: "Valor do produto"
+      flg_ativo:
+        type: "string"
+        description: "Ativo [S]im ou [N]ão, apenas 1 caracter"
+  
+############################################
+# END                                      #
+#       DEFINITIONS Modelo de dados        #
+#                                          #
+############################################

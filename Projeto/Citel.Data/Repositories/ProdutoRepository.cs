@@ -20,6 +20,7 @@ namespace Citel.Data.Repositories
                                 set cod_barras      = @CodBarras   
                                     nom_produto     = @NomProduto  
                                     des_produto     = @DesProduto  
+                                    vlr_produto     = @VlrProduto  
                                     flg_ativo       = @FlgAtivo    
                                 where cod_categoria = @CodCategoria and 
                                       cod_produto   = @CodProduto
@@ -29,12 +30,12 @@ namespace Citel.Data.Repositories
 
         public bool Inserir(Produto entidade)
         {
-            if (entidade.CodProduto <= 0)
+            if (entidade.CodProduto.GetValueOrDefault(-1) <= 0)
                 entidade.CodProduto = this.GetGerarCodigo("tb_produtos", "cod_produto");
 
             var query = @"
-                           insert into tb_produtos(cod_produto,cod_categoria,cod_barras,nom_produto,des_produto,flg_ativo) 
-                           values (@CodProduto,@CodCategoria,@CodBarras,@NomProduto,@DesProduto,@FlgAtivo)
+                           insert into tb_produtos(cod_produto,cod_categoria,cod_barras,nom_produto,des_produto,flg_ativo,vlr_produto) 
+                           values (@CodProduto,@CodCategoria,@CodBarras,@NomProduto,@DesProduto,@FlgAtivo,@VlrProduto)
                          ";
             return this.Execute(query, entidade) > 0;
         }
@@ -64,6 +65,7 @@ namespace Citel.Data.Repositories
                                  , c.cod_barras    CodBarras
                                  , c.nom_produto   NomProduto
                                  , c.des_produto   DesProduto
+                                 , c.vlr_produto   VlrProduto  
                                  , c.flg_ativo     FlgAtivo
                             from tb_produtos as c
                             {0}
@@ -71,11 +73,14 @@ namespace Citel.Data.Repositories
 
             string where = string.Empty;
 
-            if (filtro.CodProduto > 0)
+            if (filtro.CodProduto.GetValueOrDefault(-1) > 0)
                 where += string.Format("{0} c.cod_produto = @CodProduto", string.IsNullOrEmpty(where) ? " where " : " and ");
 
             if (filtro.CodCategoria > 0)
                 where += string.Format("{0} c.cod_categoria = @CodCategoria", string.IsNullOrEmpty(where) ? " where " : " and ");
+
+            if (!string.IsNullOrEmpty(filtro.CodBarras))
+                where += string.Format("{0} c.cod_barras = @CodBarras", string.IsNullOrEmpty(where) ? " where " : " and ");
 
             query = string.Format(query,where);
 

@@ -11,7 +11,7 @@ namespace Citel.Core.Model
         }
 
         [JsonPropertyName("cod_produto")]
-        public long CodProduto { get; set; }
+        public long? CodProduto { get; set; }
 
         [JsonPropertyName("cod_categoria")]
         public long CodCategoria { get; set; }
@@ -27,6 +27,9 @@ namespace Citel.Core.Model
 
         [JsonPropertyName("flg_ativo")]
         public string FlgAtivo { get; set; }
+
+        [JsonPropertyName("vlr_produto")]
+        public decimal VlrProduto { get; set; }
 
     }
 }
