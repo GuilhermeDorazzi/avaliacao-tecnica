@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Guilherme Dorazzi</Authors>
     <Product>Avaliação Tecnica</Product>
+    <Version>1.0.1</Version>
+    <UserSecretsId>ae3f3284-2e1d-4671-9f12-171a840bf981</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
