@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">{{title}}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+          <a class="nav-link" routerLink="/categoria">Categorias</a>
+          <a class="nav-link" routerLink="/produto">Produto</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <ng-template #customTpl>
+    <i>This is</i> a <u>custome</u> template <b>toast message</b>
+  </ng-template>
+  <router-outlet></router-outlet>
+  <app-toasts></app-toasts>
+</div>
+<div>
+  <footer>
+  </footer>
+</div>

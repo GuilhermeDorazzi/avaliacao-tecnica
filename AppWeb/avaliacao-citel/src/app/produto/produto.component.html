@@ -1,0 +1,123 @@
+
+<div class="container mt-5">
+
+  <!-- GRID -->
+  <div *ngIf="tipotela == 'I'" class="card list-car">
+
+    <div class="container mt-2 mb-2">
+      <div class="row">
+        <div class="col-md-1">
+          <label>Categoria:</label>
+        </div>
+        <div class="col container-combo-categoria">
+          <select class="form-control" id="categoria" name="categoria" (change)="onChange()">
+            <option *ngIf="tipotela == 'I'" value=" - ">Todos</option>
+            <option *ngFor="let categoria of categorias" [ngValue]="categoria.cod_categoria">{{categoria.cod_categoria}} - {{categoria.nom_categoria}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <h5 class="card-header">Lista de produtos                
+      <button type="button" class="btn btn-success btn-sm float-right" (click)="create()">Nova produto</button>
+    </h5>
+    
+    <div class="card-body p-0">
+      <table class="table table-hover table-striped table-bordered mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Nome</th>            
+              <th scope="col">Cod. Barras</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Ativo</th>
+              <th class="td-acao" scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let produto of produtos">
+              <td>{{produto.cod_produto}}</td>
+              <td>{{produto.nom_produto}}</td>
+              <td>{{produto.cod_barras}}</td>
+              <td>{{produto.des_produto}}</td>
+              <td>{{produto.vlr_produto}}</td>
+              <td>{{produto.flg_ativo == 'S' ? 'Sim' : 'Não' }}</td>
+              <td class="td-acao">
+                <button type="button" class="btn btn-warning btn-sm" (click)="edit(produto)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm ml-1" (click)="delete(produto)">Deletar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <!-- Formulario -->
+  <div *ngIf="tipotela == 'C' || tipotela == 'E'" class="card add-car">
+    <h5 class="card-header">{{desTela}}</h5>
+    <div class="card-body">
+        <form id="add-form" (ngSubmit)="f.form.valid && save(f)" #f="ngForm" novalidate>
+          <!-- Categoria -->
+          <div class="form-group">
+            <label for="categoria">Categoria</label>
+            <select required [attr.disabled]="tipotela == 'E' ? true : null" class="form-control" id="categoria" [(ngModel)]="produto.cod_categoria" name="categoria" #categoria="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && ativo.invalid }" placeholder="Selecione uma categoria">
+              <option *ngIf="tipotela == 'C'" value="undefined">Selecione uma categoria</option>
+              <option *ngFor="let categoria of categorias" [ngValue]="categoria.cod_categoria">{{categoria.cod_categoria}} - {{categoria.nom_categoria}}</option>
+            </select>
+           <div *ngIf="f.submitted && ativo.invalid" class="invalid-feedback">
+            <div *ngIf="codigo.errors!.required">Informe qual categoria o produto vai ser cadastrado!</div>
+           </div>
+          </div>
+          <!-- Código Produto -->
+          <div class="form-group">
+              <label for="codigo">Código</label>
+              <input type="number" [readonly]="tipotela == 'E'" [(ngModel)]="produto.cod_produto" id="codigo" name="codigo" #codigo="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && codigo.invalid }" placeholder="Digite o código">
+              <div *ngIf="f.submitted && codigo.invalid" class="invalid-feedback">
+                <div *ngIf="codigo.errors!.required">O código é obrigatório</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" [(ngModel)]="produto.nom_produto" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome da categoria">
+              <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+                <div *ngIf="codigo.errors!.required">O nome é obrigatório</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="desc">Descrição</label>
+              <input type="text" [(ngModel)]="produto.des_produto" id="desc" name="desc" #desc="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && desc.invalid }" placeholder="Descrição do produto">
+              <div *ngIf="f.submitted && desc.invalid" class="invalid-feedback">
+                <div *ngIf="desc.errors!.required">A descrição é obrigatório</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="barras">Código de Barras</label>
+              <input type="text" [(ngModel)]="produto.cod_barras" id="barras" name="barras" #barras="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && barras.invalid }" placeholder="Digite o código de barras">
+              <div *ngIf="f.submitted && barras.invalid" class="invalid-feedback">
+                <div *ngIf="barras.errors!.required">O código de barras é obrigatório</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="vlr">Valor</label>
+              <input type="number" [(ngModel)]="produto.vlr_produto" id="vlr" name="vlr" #vlr="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && vlr.invalid }" placeholder="Valor do produto">
+              <div *ngIf="f.submitted && vlr.invalid" class="invalid-feedback">
+                <div *ngIf="vlr.errors!.required">O valor é obrigatório</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="ativo">Ativo</label>
+              <select required class="form-control" id="ativo" [(ngModel)]="produto.flg_ativo" name="ativo" #ativo="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && ativo.invalid }" placeholder="Categoria ativa?">
+                <option *ngIf="tipotela == 'C'" value="undefined">Categoria ativa?</option>
+                <option *ngFor="let op of tipos" [ngValue]="op.value">{{op.text}}</option>
+              </select>
+             <div *ngIf="f.submitted && ativo.invalid" class="invalid-feedback">
+              <div *ngIf="codigo.errors!.required">Informar se a categoria está ativa é obrigatório</div>
+             </div>
+          </div>
+          <button type="reset" class="btn btn-secondary float-right" (click)="cleanForm(f)">Cancelar</button>
+          <button type="submit" class="btn btn-primary mr-4 float-right">Salvar</button>
+        </form>
+    </div>
+  </div>
+</div>
